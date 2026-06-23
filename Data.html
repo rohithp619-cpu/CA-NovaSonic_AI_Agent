@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaSonic — Data dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F5EF;
+    --paper-raised:#FFFFFF;
+    --ink:#1D1B19;
+    --ink-soft:#5B574E;
+    --ink-faint:#8A8579;
+    --coral:#D85A30;
+    --coral-deep:#A3431F;
+    --coral-tint:#F5C4B3;
+    --teal:#0F6E56;
+    --teal-deep:#085041;
+    --teal-tint:#9FE1CB;
+    --line: rgba(29,27,25,0.12);
+    --line-strong: rgba(29,27,25,0.22);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.65;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:600; margin:0;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+
+  .topnav{position:sticky; top:0; z-index:50; background:var(--paper-raised); border-bottom:1px solid var(--line);}
+  .topnav-inner{max-width:880px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:12px;}
+  .wordmark{font-family:'Fraunces',serif; font-weight:600; font-size:17px; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .wordmark .dot{width:7px; height:7px; border-radius:50%; background:var(--coral); display:inline-block;}
+
+  .page-head{padding:48px 0 8px;}
+  .page-head .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--coral-deep); margin-bottom:10px;
+  }
+  .page-head h1{font-size:32px;}
+  .page-head .subtitle{color:var(--ink-soft); font-size:15px; margin-top:10px;}
+
+  .banner{
+    background:#EFEAE0; border-left:3px solid var(--coral); border-radius:0 10px 10px 0;
+    padding:14px 18px; font-size:13px; color:var(--ink-soft); margin:28px 0;
+  }
+  .banner strong{color:var(--ink); font-weight:600;}
+
+  .stat-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:24px 0 40px;}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px 18px;}
+  .stat-card .label{font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .stat-card .value{font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:500;}
+
+  .section{padding:32px 0;}
+  .section h2{font-size:22px; margin-bottom:4px;}
+  .section .desc{color:var(--ink-soft); font-size:14px; margin-bottom:20px;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:0 0 28px;}
+  thead th{text-align:left; font-weight:600; color:var(--ink-soft); border-bottom:1px solid var(--line-strong); padding:10px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.04em;}
+  tbody td{padding:10px 12px; border-bottom:1px solid var(--line); color:var(--ink-soft);}
+  tbody td:first-child{font-weight:500; color:var(--ink);}
+  tbody tr:last-child td{border-bottom:none;}
+
+  .callout{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin:28px 0; border-left:3px solid var(--teal);}
+  .callout p{font-size:14px; color:var(--ink-soft); margin:0; line-height:1.65;}
+
+  .blockquote{background:var(--paper-raised); border:1px solid var(--line-strong); border-radius:10px; padding:18px 22px; margin:28px 0;}
+  .blockquote p{font-size:14px; color:var(--ink-soft); margin:0; line-height:1.65;}
+  .blockquote b{color:var(--ink);}
+
+  .section-footer{margin-top:28px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-faint);}
+
+  @media (max-width:600px){
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="wordmark"><span class="dot" aria-hidden="true"></span>NovaSonic</div>
+    <span style="font-size:13px; color:var(--ink-soft);">Data dashboard</span>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Internal model</div>
+    <h1>Creator health &amp; growth model</h1>
+    <p class="subtitle">Synthetic / illustrative data &middot; prepared June 2026</p>
+
+    <div class="stat-strip">
+      <div class="stat-card"><div class="label">Registered listeners</div><div class="value">500,000</div></div>
+      <div class="stat-card"><div class="label">Creators on platform</div><div class="value">12,000</div></div>
+      <div class="stat-card"><div class="label">6-month creator retention</div><div class="value">22%</div></div>
+      <div class="stat-card"><div class="label">Listens from top 3%</div><div class="value">81%</div></div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <strong>Explicitly illustrative data.</strong> Only four figures are real (500,000 listeners, 12,000 creators, 22% six-month retention, 81% of listens from the top 3%). Everything below is a synthetic model built from those anchors plus standard analytics structures &mdash; directional, not measured. Source file: <a href="Data-dashbord.md" style="text-decoration:underline;">Data-dashbord.md</a>
+  </div>
+
+  <!-- 01 — Diagnostic snapshot -->
+  <div class="section">
+    <h2>01 &mdash; Diagnostic snapshot</h2>
+    <p class="desc">Where creators drop off, who actually gets discovered, and how concentrated listening really is.</p>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Creator retention cohort</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">% of a signup cohort still publishing, month 0&ndash;12.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th><th>M0</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>M7</th><th>M8</th><th>M9</th><th>M10</th><th>M11</th><th>M12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>% active</td>
+          <td>100%</td><td>71%</td><td>55%</td><td>42%</td><td>33%</td><td>27%</td><td>22%</td><td>19%</td><td>17%</td><td>16%</td><td>14%</td><td>13%</td><td>12%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Listen concentration by tier</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">Share of creators vs. share of listens.</p>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>Creators</th><th>Share of creators</th><th>Share of listens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Top 3% (power)</td><td>360</td><td>3%</td><td>81%</td></tr>
+        <tr><td>Next 17% (established)</td><td>2,040</td><td>17%</td><td>14%</td></tr>
+        <tr><td>Next 30% (emerging)</td><td>3,600</td><td>30%</td><td>4%</td></tr>
+        <tr><td>Bottom 50% (long-tail)</td><td>6,000</td><td>50%</td><td>1%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Creator funnel, first 6 months</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">% of original signup cohort reaching each stage.</p>
+    <table>
+      <thead>
+        <tr><th>Stage</th><th>% of cohort</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Signed up</td><td>100%</td></tr>
+        <tr><td>Published episode 1</td><td>79%</td></tr>
+        <tr><td>Published 3+ episodes within 60 days</td><td>43%</td></tr>
+        <tr><td>Reached 100 cumulative listens within 60 days</td><td>21%</td></tr>
+        <tr><td>Still active at month 6</td><td>22%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Discovery source, by tier</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">Where a tier's listens actually come from.</p>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>On-platform discovery</th><th>Creator's own external promotion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Top 3% of creators</td><td>65%</td><td>35%</td></tr>
+        <tr><td>Everyone else (97%)</td><td>18%</td><td>82%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;">
+
+  <!-- 02 — Growth model -->
+  <div class="section">
+    <h2>02 &mdash; Growth model: investing in the established tier</h2>
+    <p class="desc">A cohort-based business case for a discovery &amp; support program aimed at the "next 17%" &mdash; 2,040 creators who already publish consistently but get almost no organic discovery.</p>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Model assumptions</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;"><em>Replace with NovaSonic's real ARPU, CAC, and listen data before using this for a budget decision.</em></p>
+    <table>
+      <thead><tr><th>Input</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Target tier size</td><td>2,040 creators</td></tr>
+        <tr><td>Tier baseline listens / month</td><td>1,400,000 (14% of an assumed 10M platform total)</td></tr>
+        <tr><td>Avg. listens / creator / month (baseline)</td><td>~686</td></tr>
+        <tr><td>Program cost &mdash; discovery placement engineering (one-time)</td><td>$220,000</td></tr>
+        <tr><td>Program cost &mdash; editorial/curation team, 2 FTE (annualized)</td><td>$180,000</td></tr>
+        <tr><td>Program cost &mdash; cross-promo &amp; creator support campaigns</td><td>$50,000</td></tr>
+        <tr><td style="font-weight:600; color:var(--ink);">Total Year-1 program cost</td><td style="font-weight:600; color:var(--ink);">$450,000</td></tr>
+        <tr><td>Net platform ad revenue per 1,000 listens (placeholder)</td><td>$6</td></tr>
+        <tr><td>Avoided cost per retained creator (CAC + ramp)</td><td>$2,500</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Year-1 cost vs. value (base case)</h3>
+    <table>
+      <thead><tr><th>Line item</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td>Program cost</td><td>$450,000</td></tr>
+        <tr><td>Avoided creator-replacement cost (~204 creators retained &times; $2,500)</td><td>$510,000</td></tr>
+        <tr><td>Incremental ad revenue (base case)</td><td>$17,640</td></tr>
+        <tr><td style="font-weight:600; color:var(--ink);">Total Year-1 value</td><td style="font-weight:600; color:var(--ink);">$527,640</td></tr>
+        <tr><td style="font-weight:600; color:var(--teal-deep);">Net</td><td style="font-weight:600; color:var(--teal-deep);">+$77,640 (~17% ROI)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Ad-revenue sensitivity</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">Direct ad revenue alone, by scenario &mdash; shown separately because it's the weakest leg of the case.</p>
+    <table>
+      <thead><tr><th>Scenario</th><th>Tier listen growth, mo. 12</th><th>Incremental ad revenue, yr 1</th></tr></thead>
+      <tbody>
+        <tr><td>Conservative</td><td>+15%</td><td>$7,560</td></tr>
+        <tr><td>Base case</td><td>+35%</td><td>$17,640</td></tr>
+        <tr><td>Optimistic</td><td>+60%</td><td>$30,240</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:8px 0 0;">Even the optimistic case clears barely 7% of program cost on ad revenue alone &mdash; direct monetization isn't the justification for this program.</p>
+
+    <div class="callout">
+      <p><b>Why this still pays back:</b> the case isn't ad-revenue uplift &mdash; it's retention. Lifting the 12-month active rate in this tier by 10 points (55% &rarr; 65%) keeps roughly 204 creators who'd otherwise have to be replaced. At an estimated $2,500 in acquisition and ramp cost per replacement creator, that's ~$510,000 in avoided cost &mdash; over 95% of the program's first-year value. Treat the ad-revenue line as a small bonus, not the thesis, when this goes to budget.</p>
+    </div>
+  </div>
+
+  <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;">
+
+  <!-- 03 — Dashboard mockup -->
+  <div class="section">
+    <h2>03 &mdash; Creator lifecycle dashboard (mockup)</h2>
+    <p class="desc">What an ongoing internal view of creator health could look like &mdash; refreshed weekly, segmented by tier rather than blended.</p>
+
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Active creators today</td><td>12,000</td><td></td></tr>
+        <tr><td>6-month retention (blended)</td><td>22%</td><td>Watch by tier, not blended</td></tr>
+        <tr><td>3+ episodes by day 60</td><td>43%</td><td></td></tr>
+        <tr><td>100+ listens by day 60</td><td>21%</td><td></td></tr>
+        <tr><td>Monetization-eligible creators</td><td>18%</td><td></td></tr>
+        <tr><td>Listens outside top 3%</td><td>19%</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Monetization eligibility</h3>
+    <p class="desc" style="margin-bottom:12px; margin-top:-4px;">Share of all 12,000 creators above the monthly-listener threshold.</p>
+    <table>
+      <thead><tr><th>Status</th><th>Share</th></tr></thead>
+      <tbody>
+        <tr><td>Eligible</td><td>18%</td></tr>
+        <tr><td>Not eligible</td><td>82%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="blockquote">
+      <p>Track each metric above split by tier (power / established / emerging / long-tail), not as a single blended number &mdash; a flat 22% retention figure hides that established creators are retaining far better than long-tail ones. Trigger lifecycle outreach automatically when a creator crosses 14 days without a second episode, and re-check monetization eligibility weekly so newly-qualifying creators are notified the week they cross the line, not months later.</p>
+    </div>
+  </div>
+
+  <div class="section-footer">
+    <p>All figures in this document are synthetic / illustrative, built from the platform metrics NovaSonic provided (500,000 listeners, 12,000 creators, 22% six-month creator retention, top 3% of creators generating 81% of listens) plus standard analytics structures (signup funnels, cohort tracking, listen logs, referral attribution). They are directional, not measured &mdash; swap in real ARPU, CAC, and discovery-attribution data before using any of this for a budget decision.</p>
+  </div>
+</div>
+
+</body>
+</html>
