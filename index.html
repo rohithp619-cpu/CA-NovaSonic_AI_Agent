@@ -234,6 +234,7 @@
     .data-grid{grid-template-columns:1fr;}
     .ws-grid{grid-template-columns:1fr;}
     .challenge-grid{grid-template-columns:1fr;}
+    #cs-audit [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr !important;}
     .chain{flex-direction:column; align-items:stretch; overflow-x:visible;}
     .agent-card{width:100%; flex:none; margin:0 0 0;}
     .patch{flex-direction:row; flex:none; width:100%; margin-top:0; padding:14px 0; justify-content:center; gap:10px;}
@@ -407,6 +408,7 @@
         <button class="pill" data-cs="cs-approach" onclick="switchCs('cs-approach')">Approach</button>
         <button class="pill" data-cs="cs-data" onclick="switchCs('cs-data')">Data</button>
         <button class="pill" data-cs="cs-recommendation" onclick="switchCs('cs-recommendation')">Recommendation</button>
+        <button class="pill" data-cs="cs-audit" onclick="switchCs('cs-audit')">AI Audit</button>
       </div>
     </div>
 
@@ -536,6 +538,70 @@
         <li><b>Risk — confounded validation data.</b> Content quality could mask whether activated creators simply got more exposure.</li>
         <li><b>Dependency — curation bandwidth.</b> Workstream C assumes the 2-FTE curation budget isn't already committed elsewhere.</li>
       </ul>
+    </div>
+
+    <!-- AI AUDIT -->
+    <div class="cs-panel" id="cs-audit">
+      <p style="font-size:13.5px; color:var(--ink-soft); max-width:680px;">EU AI Act compliance review for the NovaSonic growth-research consultation workflow.</p>
+
+      <div class="data-card" style="margin-bottom:16px;">
+        <div style="display:flex; flex-wrap:wrap; gap:20px; font-size:13px;">
+          <div><b>Workflow</b><br><span class="mono" style="font-size:12.5px;">novasonic-growth-research-consultation</span></div>
+          <div><b>Risk tier</b><br><span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; background:var(--coral-tint); color:var(--coral-deep); padding:2px 8px; border-radius:4px;">minimal + flag</span></div>
+          <div><b>Owner</b><br>Rohith Ray (Business Consultant)</div>
+          <div><b>Last audit</b><br><span class="mono">2026-06-23</span></div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px; font-weight:600; margin:24px 0 10px;">Risk classification</h3>
+      <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.65;">This workflow is an AI-assisted research and analysis exercise: a consultant feeds Claude synthetic, aggregate platform metrics (listener counts, retention cohorts, listen concentration by tier) and gets back diagnostic findings and a growth business case. Claude does not decide anything about any individual creator or user; it produces a document that human leadership reviews and acts on (or doesn't). That places it at <strong>minimal risk</strong> under the EU AI Act's tiering, not high-risk: it is not listed in Annex III (no employment decisions, no credit or essential-services eligibility scoring, no biometric or law-enforcement use), and there is a human in the loop between the AI's output and any real-world action. The flag matters though: you confirmed in Q4 that decisions stemming from this report can change how users interact with the service (discovery exposure, monetization eligibility). If NovaSonic later automates any of those changes (an algorithmic discovery gate, an automatic monetization cutoff) without human review, that downstream system would need its own classification, and given it touches people's income and visibility on the platform, it could land much closer to <strong>high-risk</strong>. A fundamental rights impact assessment is not required for this consultation workflow as described, but would likely be warranted for any automated implementation of its recommendations.</p>
+
+      <h3 style="font-size:16px; font-weight:600; margin:24px 0 10px;">Five-point hygiene check</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;">Bias</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; background:#FDE8E0; color:#A3431F; padding:2px 7px; border-radius:4px;">FAIL</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.55;">The growth model in the source document explicitly funds only the "next 17%" tier and leaves the bottom 50% (6,000 creators, 1% of listens) out of any intervention, which risks the analysis itself hardening the popularity concentration it identifies as a problem.</p>
+        </div>
+        <div style="background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;">Privacy</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; background:#D0F0E4; color:#085041; padding:2px 7px; border-radius:4px;">PASS</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.55;">The input data is explicitly labelled synthetic/illustrative aggregate metrics, not real personal, customer, or employee records.</p>
+        </div>
+        <div style="background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;">Consent</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; background:#FDE8E0; color:#A3431F; padding:2px 7px; border-radius:4px;">FAIL</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.55;">The document itself says to "replace with NovaSonic's real ARPU, CAC, and listen data before using this for a budget decision," and no consent or lawful-basis process exists yet for when real, individual-level creator data replaces those placeholders.</p>
+        </div>
+        <div style="background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;">Attribution</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; background:#D0F0E4; color:#085041; padding:2px 7px; border-radius:4px;">PASS</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.55;">The source document clearly marks which figures are synthetic versus real, and instructs the user not to use placeholder figures for actual budget decisions.</p>
+        </div>
+        <div style="background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;">Transparency</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; background:#D0F0E4; color:#085041; padding:2px 7px; border-radius:4px;">PASS</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.55;">The stated audience (NovaSonic's leadership and strategy team) explicitly knows AI was used to produce the analysis.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px; font-weight:600; margin:24px 0 10px;">Remediation</h3>
+      <ol style="font-size:13.5px; color:var(--ink-soft); line-height:1.7; padding-left:20px;">
+        <li>Before this report (or any version of it) informs a real budget or policy decision, swap in NovaSonic's actual metrics and put a documented lawful basis and consent pathway in place for the real, creator-level data behind those metrics; right now that pathway does not exist, only synthetic placeholders do.</li>
+        <li>Re-scope the growth program so the bottom 50% long-tail tier is explicitly assessed rather than silently excluded; funding only the established tier, while leaving the long-tail with zero intervention, should be a stated and justified choice, not a default.</li>
+      </ol>
+
+      <div class="banner" style="margin-top:20px;"><strong>Note:</strong> This is general education on the EU AI Act, not legal advice.</div>
     </div>
   </div>
 </section>
